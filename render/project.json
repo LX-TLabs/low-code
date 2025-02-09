@@ -1,0 +1,9 @@
+{
+  "name": "render",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "render/src",
+  "projectType": "library",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project render --web",
+  "targets": {}
+}
