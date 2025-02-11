@@ -1,11 +1,19 @@
 import styles from './render.module.less';
 
-import { RenderProps } from './render';
+import { BaseRenderComponentEnum, RenderProps } from './render';
 import { traverseSchema } from '../utils/traverseSchema';
+import { isBaseRenderComponentEnum } from '../utils/common';
+
 export function Render(props: RenderProps) {
-  const { schema, components } = props;
+  const { schema, components, customComponents } = props;
   const componentType = traverseSchema(schema);
-  const Component = components[componentType];
+  let Component;
+  // ts 类型保护
+  if (isBaseRenderComponentEnum(componentType)) {
+    Component = components[componentType];
+  } else {
+    Component = customComponents[componentType];
+  }
 
   return (
     <div className={styles['container']}>
