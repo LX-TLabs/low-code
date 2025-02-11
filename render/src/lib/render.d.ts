@@ -1,12 +1,23 @@
 // 基于阿里的pro-components 来设计
 export type BaseRenderSchemaType = 'string' | 'number' | 'object';
-export type MaterialRenderSchemaType = 'form';
+export type MaterialRenderSchemaType = 'form' | 'table' | 'list';
+export type PageRenderSchemaType = 'page';
 export type CustomRenderSchemaType = string;
+
+export type RenderSchemaType =
+  | BaseRenderSchemaType
+  | MaterialRenderSchemaType
+  | CustomRenderSchemaType
+  | PageRenderSchemaType;
 export interface RenderSchema {
-  type:
-    | BaseRenderSchemaType
-    | MaterialRenderSchemaType
-    | CustomRenderSchemaType;
+  // 组件类型
+  type: RenderSchemaType;
+  // 组件名称
+  name: string;
+  // 组件属性
+  props: Record<string, any>;
+  // 组件子组件
+  children?: RenderSchema[];
 }
 export interface RenderProps {
   // schema结构
@@ -14,7 +25,7 @@ export interface RenderProps {
   // component type
   components: Record<BaseRenderComponentEnum, React.ComponentType<any>>;
   // custom component type
-  customComponents: Record<string, React.ComponentType<any>>;
+  customComponents?: Record<string, React.ComponentType<any>>;
 }
 
 // 组件类型枚举
@@ -25,4 +36,7 @@ export enum BaseRenderComponentEnum {
   Select = 'Select',
   DatePicker = 'DatePicker',
   TimePicker = 'TimePicker',
+  Radio = 'Radio',
+  Checkbox = 'Checkbox',
+  Switch = 'Switch',
 }

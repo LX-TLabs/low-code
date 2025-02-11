@@ -3,17 +3,19 @@ import {
   BaseRenderComponentEnum,
   RenderSchema,
   CustomRenderSchemaType,
-} from '../lib/render';
+  RenderSchemaType,
+} from '../lib/render.d';
 
 // TODO: 根据schema 类型 判断对应组件
 export function traverseSchema(
   schema: RenderSchema
-): BaseRenderComponentEnum | MaterialRenderSchemaType | CustomRenderSchemaType {
-  if (schema.type === 'string') {
-    return BaseRenderComponentEnum.Input;
+): RenderSchemaType {
+  switch (schema.type) {
+    case 'string':
+      return BaseRenderComponentEnum.Input;
+    case 'number':
+      return BaseRenderComponentEnum.InputNumber;
+    default:
+      return schema.type as CustomRenderSchemaType;
   }
-  if (schema.type === 'number') {
-    return BaseRenderComponentEnum.InputNumber;
-  }
-  return schema.type as CustomRenderSchemaType;
 }

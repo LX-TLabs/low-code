@@ -1,4 +1,4 @@
-import { BaseRenderComponentEnum } from '../lib/render';
+import { BaseRenderComponentEnum } from '../lib/render.d';
 
 export function isBaseRenderComponentEnum(
   value: any
